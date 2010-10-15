@@ -19,12 +19,31 @@ def nl
   "\n"
 end
 
+
+def find_file match
+  path = match.to_s.sub('_spec', '').sub(/^spec\//, '')
+
+  locations = [
+    File.join("app", path),
+    File.join("lib", path),
+    path
+  ]
+  if File.exist?(match.to_s) && match.to_s["_spec"].nil?
+    match
+  elsif path = locations.find {|x| File.exist?(x) }
+    path
+  end
+end
+
 def find_spec match
+  locations = [
+    File.join("spec", match[1] + "_spec.rb"),
+    File.join("spec", match[2] + "_spec.rb"),
+    File.join("spec", match[1].sub(/^app/, '') + "_spec.rb")
+  ]
   if match[1] =~ /_spec$/
     match
-  elsif File.exist?(specpath = File.join("spec", match[1] + "_spec.rb"))
-    specpath
-  elsif File.exist?(specpath = File.join("spec", match[2] + "_spec.rb"))
+  elsif specpath = locations.find {|x| File.exist?(x) }
     specpath
   end
 end
@@ -36,19 +55,23 @@ end
 
 def run_spec match
   specpath = find_spec(match)
+  return unless specpath
   print magenta, "spec", reset, " ", specpath, nl
   result = %x{ spec #{specpath} }
 
 
   if fail?(result)
     puts result
+    false
   else
     print green, "success", reset, nl
+    true
   end
 end
 
 def run_cmd(cmd, match)
-  return if match[1] =~ /_spec$/
+  match = find_file(match)
+  return unless match
   puts "=" * 80
   print magenta, cmd, reset, " ", match, nl
   system "#{cmd} #{match}"
@@ -57,7 +80,8 @@ end
 watch("^(.*/(.*))\.rb$") do |md|
   system "clear"
 
-  run_spec(md)
-  run_cmd("flog", md)
-  run_cmd("reek", md)
+  if run_spec(md)
+    run_cmd("flog", md)
+    run_cmd("reek", md)
+  end
 end

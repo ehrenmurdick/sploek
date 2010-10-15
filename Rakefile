@@ -6,11 +6,14 @@ begin
   Jeweler::Tasks.new do |gem|
     gem.name = "sploek"
     gem.summary = %Q{Auto run specs, flog, reek}
-    gem.description = %Q{TODO: longer description of your gem}
     gem.email = "ehren.murdick@gmail.com"
     gem.homepage = "http://github.com/ehrenmurdick/sploek"
     gem.authors = ["Ehren Murdick"]
     gem.add_development_dependency "rspec", ">= 1.2.9"
+
+    gem.add_dependency "term-ansicolor", ">= 1.0.5"
+
+    gem.bindir = "bin"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
   Jeweler::GemcutterTasks.new
