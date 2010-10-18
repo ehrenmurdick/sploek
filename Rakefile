@@ -12,6 +12,7 @@ begin
     gem.add_development_dependency "rspec", ">= 1.2.9"
 
     gem.add_dependency "term-ansicolor", ">= 1.0.5"
+    gem.add_dependency "watchr", ">= 0.6"
 
     gem.bindir = "bin"
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings

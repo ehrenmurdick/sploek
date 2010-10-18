@@ -1,6 +1,6 @@
 = sploek
 
-Description goes here.
+Do you red and green, but don't refactor? Sploek is like autospec, but if the tests pass it also runs flog and reek. Because passing tests don't mean you're done.
 
 == Note on Patches/Pull Requests
  
