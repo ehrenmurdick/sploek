@@ -48,24 +48,20 @@ def find_spec match
   end
 end
 
-def fail?(result)
-  md = result.match(/(\d*) failure(s?)/)
-  md[1].to_i > 0
-end
-
 def run_spec match
   specpath = find_spec(match)
   return unless specpath
   print magenta, "spec", reset, " ", specpath, nl
-  result = %x{ spec #{specpath} }
+  # result = %x{ spec #{specpath} }
 
 
-  if fail?(result)
-    puts result
-    false
-  else
+  if system("spec #{specpath}")
+    system("clear")
+    print magenta, "spec", reset, " ", specpath, nl
     print green, "success", reset, nl
     true
+  else
+    false
   end
 end
 
