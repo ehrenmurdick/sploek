@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sploek}
-  s.version = "0.1.0"
+  s.version = "0.1.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Ehren Murdick"]
-  s.date = %q{2010-10-15}
+  s.date = %q{2010-10-18}
   s.default_executable = %q{sploek}
   s.email = %q{ehren.murdick@gmail.com}
   s.executables = ["sploek"]
@@ -29,7 +29,8 @@ Gem::Specification.new do |s|
      "lib/sploek.watchr.rb",
      "spec/spec.opts",
      "spec/spec_helper.rb",
-     "spec/sploek_spec.rb"
+     "spec/sploek_spec.rb",
+     "sploek.gemspec"
   ]
   s.homepage = %q{http://github.com/ehrenmurdick/sploek}
   s.rdoc_options = ["--charset=UTF-8"]
@@ -37,7 +38,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Auto run specs, flog, reek}
   s.test_files = [
-    "spec/spec_helper.rb",
+    "spec/models/foobar_spec.rb",
+     "spec/spec_helper.rb",
      "spec/sploek_spec.rb"
   ]
 
