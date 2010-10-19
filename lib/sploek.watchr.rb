@@ -52,23 +52,15 @@ def run_spec match
   specpath = find_spec(match)
   return unless specpath
   print magenta, "spec", reset, " ", specpath, nl
-  # result = %x{ spec #{specpath} }
 
 
-  if system("spec #{specpath}")
-    system("clear")
-    print magenta, "spec", reset, " ", specpath, nl
-    print green, "success", reset, nl
-    true
-  else
-    false
-  end
+  system("spec #{specpath}")
 end
 
 def run_cmd(cmd, match)
   match = find_file(match)
   return unless match
-  puts "=" * 80
+  puts "-" * 80
   print magenta, cmd, reset, " ", match, nl
   system "#{cmd} #{match}"
 end
@@ -80,4 +72,6 @@ watch("^(.*/(.*))\.rb$") do |md|
     run_cmd("flog", md)
     run_cmd("reek", md)
   end
+
+  puts "=" * 80
 end
